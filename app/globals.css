@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent-color: #e11d48;
+  --accent-hover: #be123c;
+  --accent-glow: rgba(225, 29, 72, 0.35);
+  --dark-bg: #08090c;
+  --dark-surface: #0f1118;
+  --dark-card: #141722;
+  --dark-border: #212638;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08090c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23283c;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e11d48;
+}
+
+/* Utility classes */
+.clip-path-notch {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.tech-grid {
+  background-image: 
+    linear-gradient(to right, rgba(35, 40, 60, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(35, 40, 60, 0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.tech-grid-dense {
+  background-image: 
+    linear-gradient(to right, rgba(35, 40, 60, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(35, 40, 60, 0.15) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Hide scrollbar for carousels */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle glow effects */
+.racing-glow {
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.35);
+}
+
+.racing-glow-sm {
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.25);
+}
