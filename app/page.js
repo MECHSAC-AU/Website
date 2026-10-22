@@ -87,13 +87,13 @@ export default function HomePage() {
         <div className="absolute top-8 left-8 hidden lg:block z-10 font-mono text-[10px] text-slate-500 space-y-1">
           <div>SYS: AUTONOMY // TELEMETRY: 60Hz</div>
           <div>DIV: MECH ENG R&D GROUP</div>
-          <div className="text-racing-500">COORD: 42° 21' N / 71° 03' W</div>
+          <div className="text-racing-500">ORG: {siteConfig.universityName}</div>
         </div>
 
         <div className="absolute top-8 right-8 hidden lg:block z-10 font-mono text-[10px] text-slate-500 text-right space-y-1">
           <div>STATUS: 2026 SEASON READY</div>
-          <div className="text-racing-400">ORGANIZATION: STUDENT FORMULA</div>
-          <div>EST: {siteConfig.establishedYear}</div>
+          <div className="text-racing-400">ORGANIZATION: {siteConfig.clubName}</div>
+          <div>EST: {siteConfig.establishedYear} // {siteConfig.location.city}</div>
         </div>
 
         {/* Hero Content */}
@@ -102,7 +102,7 @@ export default function HomePage() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#131622]/90 border border-[#2b334a] mb-6 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
             <span className="font-mono text-[11px] font-bold text-slate-300 tracking-widest uppercase">
-              {siteConfig.departmentName} • {siteConfig.clubName}
+              {siteConfig.universityName} • {siteConfig.departmentName}
             </span>
           </div>
 

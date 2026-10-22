@@ -1,25 +1,28 @@
 export const siteConfig = {
-  clubName: "Automobile Club",
-  clubShortName: "AU-MEC",
-  subTitle: "Department of Mechanical Engineering",
-  universityName: "[UNIVERSITY NAME]",
-  departmentName: "[DEPARTMENT OF MECHANICAL ENGINEERING]",
+  clubName: "MECHSAC",
+  clubFullName: "Mechanical Engineering Students Automobile Club",
+  clubShortName: "MECHSAC",
+  logo: "/images/logos/club-logo.png",
+  universityLogo: "/images/logos/university-logo.png",
+  subTitle: "Mechanical Engineering Students Automobile Club",
+  universityName: "Aliah University",
+  departmentName: "Department of Mechanical Engineering",
   tagline: "Engineering Motion. Designing The Future.",
   establishedYear: "2018",
-  contactEmail: "automobileclub@[university].edu",
+  contactEmail: "mechsac@aliah.ac.in",
   facultyAdvisor: {
     name: "Dr. [FACULTY COORDINATOR]",
     designation: "Professor & Faculty Advisor",
     department: "Department of Mechanical Engineering",
     office: "Engineering Block III, Room 304",
-    email: "advisor.auto@[university].edu",
+    email: "advisor.auto@aliah.ac.in",
     image: "/images/faculty/faculty-advisor.jpg",
-    message: "Our Automobile Club represents the pinnacle of experiential engineering. By bridging rigorous theoretical mechanical principles with hands-on fabrication, telemetry, and motorsport competition, our students graduate not just as degree holders, but as industry-ready automotive engineers capable of solving tomorrow's sustainable mobility challenges."
+    message: "MECHSAC represents the pinnacle of experiential engineering at Aliah University. By bridging rigorous theoretical mechanical principles with hands-on fabrication, telemetry, and motorsport competition, our students graduate not just as degree holders, but as industry-ready automotive engineers capable of solving tomorrow's sustainable mobility challenges."
   },
   location: {
     workshop: "Automotive R&D Bay & Machine Shop, Mech Lab 02",
-    campus: "[MAIN CAMPUS, NORTH QUAD]",
-    city: "[CITY, STATE, ZIP]"
+    campus: "New Town Main Campus",
+    city: "Kolkata, West Bengal"
   },
   socialLinks: {
     linkedin: "https://linkedin.com",

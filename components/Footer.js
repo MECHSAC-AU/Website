@@ -19,8 +19,12 @@ export default function Footer() {
           {/* Col 1 & 2: Brand & University Identity */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-sm bg-[#131622] border border-[#2a3044] flex items-center justify-center">
-                <span className="font-mono text-sm font-black text-racing-500">AU</span>
+              <div className="relative w-12 h-12 rounded-md overflow-hidden bg-[#0c0e14] border border-[#2a3044] flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.15)] shrink-0">
+                <img
+                  src={siteConfig.logo || "/images/logos/club-logo.png"}
+                  alt={`${siteConfig.clubName} Logo`}
+                  className="w-full h-full object-cover"
+                />
                 <span className="absolute -bottom-1 -right-1 w-2 h-2 bg-racing-500 rotate-45" />
               </div>
               <div>
@@ -28,7 +32,7 @@ export default function Footer() {
                   {siteConfig.clubName}
                 </span>
                 <span className="font-mono text-[10px] tracking-widest text-racing-500 uppercase block">
-                  {siteConfig.departmentName}
+                  {siteConfig.universityName} • {siteConfig.departmentName}
                 </span>
               </div>
             </div>
@@ -42,7 +46,7 @@ export default function Footer() {
               <div className="flex items-start gap-2.5 text-xs text-slate-400">
                 <MapPin className="w-4 h-4 text-racing-500 shrink-0 mt-0.5" />
                 <span>
-                  {siteConfig.location.workshop}, {siteConfig.location.campus}
+                  {siteConfig.location.workshop}, {siteConfig.location.campus}, {siteConfig.location.city}
                 </span>
               </div>
               <div className="flex items-center gap-2.5 text-xs text-slate-400">
@@ -133,16 +137,25 @@ export default function Footer() {
               <span className="w-1.5 h-1.5 bg-racing-600 rounded-full" />
               Affiliation
             </h4>
-            <div className="p-3.5 rounded bg-[#10131d] border border-[#1e2333] mb-4">
-              <span className="font-mono text-[9px] text-racing-500 uppercase block tracking-wider font-semibold">
-                ACCREDITATION
-              </span>
-              <p className="font-sans text-xs text-slate-300 mt-1 font-medium">
-                {siteConfig.departmentName}
-              </p>
-              <p className="font-mono text-[10px] text-slate-500 mt-0.5">
-                {siteConfig.universityName}
-              </p>
+            <div className="p-3.5 rounded bg-[#10131d] border border-[#1e2333] mb-4 flex items-center gap-3">
+              <div className="w-11 h-11 rounded-full overflow-hidden bg-white/10 border border-[#2a3044] shrink-0 p-1 flex items-center justify-center">
+                <img
+                  src={siteConfig.universityLogo || "/images/logos/university-logo.png"}
+                  alt={`${siteConfig.universityName} Seal`}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div>
+                <span className="font-mono text-[9px] text-racing-500 uppercase block tracking-wider font-semibold">
+                  ACCREDITATION
+                </span>
+                <p className="font-sans text-xs text-white mt-0.5 font-bold">
+                  {siteConfig.universityName}
+                </p>
+                <p className="font-mono text-[10px] text-slate-400 mt-0.5">
+                  {siteConfig.departmentName}
+                </p>
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
@@ -167,7 +180,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
           <div>
-            © 2026 Automobile Club — {siteConfig.departmentName}
+            © 2026 {siteConfig.clubName} — {siteConfig.departmentName}, {siteConfig.universityName}
           </div>
           <div className="flex items-center gap-4 text-[11px]">
             <span className="text-slate-400">SYSTEM ID: MEC-AUTO-2026</span>

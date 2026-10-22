@@ -92,25 +92,46 @@ export default function AboutPage() {
         />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-racing-500">
-                ORGANIZATIONAL IDENTITY
-              </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-8 max-w-3xl">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-racing-500">
+                  ORGANIZATIONAL IDENTITY
+                </span>
+              </div>
+
+              <h1 className="font-sans text-4xl sm:text-6xl font-black text-white uppercase tracking-tight leading-[1.05]">
+                Engineering beyond <br />
+                <span className="text-racing-500">the classroom.</span>
+              </h1>
+
+              <p className="mt-6 font-sans text-base sm:text-xl text-slate-300 font-light leading-relaxed">
+                Founded under the {siteConfig.departmentName} at{" "}
+                {siteConfig.universityName}, {siteConfig.clubName} ({siteConfig.clubFullName}) bridges textbook
+                fluid dynamics, structural mechanics, and thermodynamics with
+                the reality of high-performance vehicle execution.
+              </p>
             </div>
-
-            <h1 className="font-sans text-4xl sm:text-6xl font-black text-white uppercase tracking-tight leading-[1.05]">
-              Engineering beyond <br />
-              <span className="text-racing-500">the classroom.</span>
-            </h1>
-
-            <p className="mt-6 font-sans text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-              Founded under the {siteConfig.departmentName} at{" "}
-              {siteConfig.universityName}, the Automobile Club bridges textbook
-              fluid dynamics, structural mechanics, and thermodynamics with
-              the reality of high-performance vehicle execution.
-            </p>
+            <div className="lg:col-span-4 flex justify-center lg:justify-end">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-3xl p-2 bg-gradient-to-b from-[#1f2436] via-[#121522] to-[#08090d] border border-[#2c344d] shadow-[0_0_40px_rgba(225,29,72,0.2)] flex items-center justify-center">
+                  <img
+                    src={siteConfig.logo || "/images/logos/club-logo.png"}
+                    alt={`${siteConfig.clubName} Crest`}
+                    className="w-full h-full object-contain rounded-2xl"
+                  />
+                  <span className="absolute -bottom-1.5 -right-1.5 w-3.5 h-3.5 bg-racing-500 rotate-45 shadow-[0_0_10px_rgba(225,29,72,0.8)]" />
+                </div>
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full p-2 bg-gradient-to-b from-[#1f2436] via-[#121522] to-[#08090d] border border-[#2c344d] shadow-[0_0_30px_rgba(225,29,72,0.15)] flex items-center justify-center">
+                  <img
+                    src={siteConfig.universityLogo || "/images/logos/university-logo.png"}
+                    alt={`${siteConfig.universityName} Seal`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

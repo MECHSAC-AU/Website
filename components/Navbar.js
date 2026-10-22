@@ -65,11 +65,15 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-3 group focus:outline-none"
-            aria-label="Automobile Club Home"
+            aria-label={`${siteConfig.clubName} Home`}
           >
-            {/* Logo Emblem Placeholder */}
-            <div className="relative w-10 h-10 rounded-sm bg-[#131622] border border-[#2a3044] group-hover:border-racing-500/80 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(225,29,72,0.1)] group-hover:shadow-[0_0_20px_rgba(225,29,72,0.3)]">
-              <img src="" alt="Club Logo" />
+            {/* Logo Emblem */}
+            <div className="relative w-11 h-11 rounded-md overflow-hidden bg-[#0c0e14] border border-[#2a3044] group-hover:border-racing-500/80 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(225,29,72,0.15)] group-hover:shadow-[0_0_20px_rgba(225,29,72,0.35)] shrink-0">
+              <img
+                src={siteConfig.logo || "/images/logos/club-logo.png"}
+                alt={`${siteConfig.clubName} Logo`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
               <span className="absolute -bottom-1 -right-1 w-2 h-2 bg-racing-500 rotate-45" />
             </div>
 
@@ -78,7 +82,7 @@ export default function Navbar() {
                 {siteConfig.clubName}
               </span>
               <span className="font-mono text-[9px] tracking-widest text-slate-400 uppercase">
-                DEPT OF MECHANICAL ENG.
+                {siteConfig.universityName} • {siteConfig.departmentName}
               </span>
             </div>
           </Link>
@@ -110,8 +114,21 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop Right CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Desktop Right CTA & University Seal */}
+          <div className="hidden lg:flex items-center gap-3">
+            <div className="flex items-center gap-2 pl-2 pr-3 py-1 rounded bg-[#10131d] border border-[#232738]">
+              <div className="w-6 h-6 rounded-full overflow-hidden bg-white/10 shrink-0 p-0.5 border border-white/15">
+                <img
+                  src={siteConfig.universityLogo || "/images/logos/university-logo.png"}
+                  alt={siteConfig.universityName}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="font-mono text-[10px] font-semibold text-slate-300 uppercase tracking-wider">
+                {siteConfig.universityName}
+              </span>
+            </div>
+
             <Link
               href="/contact#join"
               className="relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-racing-600 hover:bg-racing-700 border border-racing-500/60 rounded-sm shadow-[0_0_15px_rgba(225,29,72,0.3)] hover:shadow-[0_0_22px_rgba(225,29,72,0.5)] transition-all duration-300 group"
@@ -149,12 +166,26 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-[65px] z-40 bg-[#08090cf2] backdrop-blur-2xl border-t border-[#212638] flex flex-col justify-between p-6 lg:hidden overflow-y-auto animate-fade-in">
           {/* Header Metadata */}
-          <div className="py-2 border-b border-[#1b1f2e] mb-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
-              <span className="font-mono text-[11px] tracking-wider text-slate-400 uppercase">
-                {siteConfig.universityName}
-              </span>
+          <div className="py-2.5 border-b border-[#1b1f2e] mb-4 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded overflow-hidden border border-[#2a3044] shrink-0 bg-[#0c0e14]">
+                <img
+                  src={siteConfig.logo || "/images/logos/club-logo.png"}
+                  alt={siteConfig.clubName}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="w-7 h-7 rounded-full overflow-hidden border border-[#2a3044] shrink-0 bg-white/10 p-0.5">
+                <img
+                  src={siteConfig.universityLogo || "/images/logos/university-logo.png"}
+                  alt={siteConfig.universityName}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-sans text-xs font-bold text-white uppercase">{siteConfig.clubName}</span>
+                <span className="font-mono text-[9px] text-racing-500 uppercase">{siteConfig.universityName}</span>
+              </div>
             </div>
             <span className="font-mono text-[10px] text-racing-500">
               SYS // ACTIVE
@@ -206,8 +237,8 @@ export default function Navbar() {
               <p className="font-mono text-[10px] text-slate-400">
                 {siteConfig.subTitle}
               </p>
-              <p className="font-mono text-[9px] text-slate-600 mt-1">
-                LOCATION: {siteConfig.location.workshop}
+              <p className="font-mono text-[9px] text-slate-500 mt-1">
+                {siteConfig.universityName} • {siteConfig.location.workshop}
               </p>
             </div>
           </div>
