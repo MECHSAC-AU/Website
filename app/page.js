@@ -404,12 +404,14 @@ export default function HomePage() {
 
       {/* ========================================================= */}
       {/* 7. GALLERY PREVIEW */}
+      {/* 8. GALLERY PREVIEW */}
       {/* ========================================================= */}
       <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <SectionHeading
               eyebrow="// 06 . VISUAL ARCHIVE"
+              eyebrow="// 07 . VISUAL ARCHIVE"
               title="Inside The Workshop & Track"
               subtitle="Behind the scenes in the machine bay, aerodynamic wind tunnel testing, and circuit competition."
               className="mb-0"
@@ -430,6 +432,7 @@ export default function HomePage() {
 
       {/* ========================================================= */}
       {/* 8. CALL TO ACTION */}
+      {/* 9. CALL TO ACTION */}
       {/* ========================================================= */}
       <section className="relative py-24 lg:py-32 bg-gradient-to-b from-[#0e1018] to-[#08090C] overflow-hidden text-center">
         {/* Decorative Grid Lines */}
