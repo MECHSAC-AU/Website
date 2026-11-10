@@ -144,30 +144,27 @@ export default function AboutPage() {
               <SectionHeading
                 eyebrow="// ORIGINS & EVOLUTION"
                 title="Our Story"
-                subtitle="From a modest student garage project to a nationally ranked Formula Student engineering team."
+                subtitle={`Founded in ${siteConfig.establishedYear} under the ${siteConfig.departmentName} at ${siteConfig.universityName}.`}
                 className="mb-6"
               />
 
               <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
-                In {siteConfig.establishedYear}, a small cadre of third-year mechanical
-                engineering students banded together with a singular ambition: to build
-                a vehicle from raw tubing and aluminum bar stock that could pass
-                the unforgiving technical scrutineering of national Formula competitions.
+                In {siteConfig.establishedYear}, students and faculty of the {siteConfig.departmentName} at{" "}
+                {siteConfig.universityName} came together to establish {siteConfig.clubName} ({siteConfig.clubFullName})
+                with a bold mandate: to bridge theoretical mechanical sciences with hands-on automotive design,
+                fabrication, and motorsport innovation.
               </p>
 
               <p className="text-sm sm:text-base text-slate-400 font-light leading-relaxed">
-                Operating out of a cramped corner in the machine shop with little more
-                than a handheld angle grinder and SolidWorks student licenses, they
-                engineered the club&apos;s first prototype. What began as an extracurricular
-                passion project rapidly evolved into the department&apos;s premier technical
-                flagship organization.
+                Operating directly out of the department&apos;s automotive laboratories and machine bays, our club
+                provides a multidisciplinary platform for CAD parametric modeling, CFD aerodynamic simulations,
+                telemetry instrumentation, and precision spaceframe chassis manufacturing.
               </p>
 
               <p className="text-sm sm:text-base text-slate-400 font-light leading-relaxed">
-                Today, our roster spans more than 50 active student engineers across
-                chassis, powertrain, aerodynamics, electronics, and operations. We
-                regularly compete on premier race circuits, publish student research papers,
-                and send our alumni into top motorsport teams and automotive OEMs worldwide.
+                Today, our founding roster boasts {siteConfig.stats.activeMembers} active student engineers across
+                aerodynamics, chassis, powertrain, vehicle dynamics, electronics, and operations as we prepare our
+                debut engineering prototypes for upcoming inter-collegiate and national competitions.
               </p>
             </div>
 

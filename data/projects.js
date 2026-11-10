@@ -5,10 +5,10 @@ export const projectsData = [
     title: "Apex-26 Formula Student Prototype",
     category: "Motorsports",
     year: "2026",
-    status: "Competition Ready",
+    status: "In Active Prototyping",
     featured: true,
     tagline: "Ultra-lightweight multi-link open-wheel racer engineered for dynamic autocross & endurance trials.",
-    description: "The Apex-26 represents 14 months of rigorous research, CAD modeling, and precision fabrication by the Department of Mechanical Engineering Automobile Club. Designed to compete in national Formula Student design and dynamic events, the prototype features a custom tubular spaceframe chassis coupled with an aero package producing over 420N of downforce at 80 km/h.",
+    description: "The Apex-26 represents the flagship engineering project of MECHSAC at Aliah University. Designed for national Formula Student design and dynamic trials, the prototype features a custom tubular spaceframe chassis coupled with an aero package producing over 420N of downforce at 80 km/h.",
     heroImage: "/images/projects/project-01.jpg",
     gallery: [
       "/images/projects/project-01-a.jpg",
@@ -17,7 +17,7 @@ export const projectsData = [
     ],
     technologies: ["CAD SolidWorks", "CFD Ansys Fluent", "CNC 5-Axis", "Telemetry DAQ", "FEA Nastran", "TIG Welding"],
     specs: [
-      { label: "Acceleration (0-100 km/h)", value: "3.4 sec" },
+      { label: "Target Acceleration (0-100 km/h)", value: "3.4 sec" },
       { label: "Curb Weight (Dry)", value: "185 kg" },
       { label: "Peak Power Output", value: "72 kW (96.5 HP)" },
       { label: "Downforce @ 80 km/h", value: "420 N" },
@@ -36,8 +36,8 @@ export const projectsData = [
     number: "02",
     title: "VoltRush Electric Vehicle Platform",
     category: "EV",
-    year: "2025",
-    status: "Completed",
+    year: "2026",
+    status: "Design Phase",
     featured: false,
     tagline: "400V battery-electric testbed exploring high-efficiency regenerative recovery and custom modular thermal cells.",
     description: "Developed to pioneer sustainable electric propulsion within the university, VoltRush integrates a custom liquid-cooled lithium-iron-phosphate (LiFePO4) battery enclosure, synchronous motor architecture, and proprietary battery management firmware.",
@@ -58,7 +58,7 @@ export const projectsData = [
     highlights: [
       "Custom active dielectric liquid immersion cooling manifold",
       "Isolated optical CAN communication between 12 slave BMS boards",
-      "Passed all regional high-voltage isolation and safety shutdown trials"
+      "Rigorous high-voltage isolation and safety shutdown architecture"
     ]
   },
   {
@@ -66,8 +66,8 @@ export const projectsData = [
     number: "03",
     title: "AeroTrack Carbon Monocoque Chassis",
     category: "Fabrication",
-    year: "2025",
-    status: "Completed",
+    year: "2026",
+    status: "R&D Phase",
     featured: false,
     tagline: "Vacuum-infused prepreg monocoque safety cell with aerospace aluminum honeycomb cores.",
     description: "An advanced research and fabrication project investigating carbon fiber prepreg sandwich composites to replace traditional steel tubular chassis. Built in collaboration with composite manufacturing facilities and department autoclaves.",
@@ -87,7 +87,7 @@ export const projectsData = [
     highlights: [
       "42% weight reduction over Chromoly spaceframe equivalent",
       "Integrated front bulkhead and steering rack hardpoints",
-      "Non-destructive ultrasonic testing verified zero void formation"
+      "Non-destructive ultrasonic testing for void elimination"
     ]
   },
   {
@@ -95,8 +95,8 @@ export const projectsData = [
     number: "04",
     title: "TerraNav Autonomous Rover",
     category: "Robotics",
-    year: "2024",
-    status: "Completed",
+    year: "2026",
+    status: "Prototyping",
     featured: false,
     tagline: "All-terrain autonomous rover featuring passive rocker-bogie kinematics and 3D LiDAR SLAM.",
     description: "Cross-disciplinary project bridging mechanical suspension dynamics with autonomous navigation. Engineered to traverse rough obstacle terrain autonomously while mapping environments using point clouds and Kalman sensor fusion.",
@@ -123,11 +123,11 @@ export const projectsData = [
     number: "05",
     title: "Kinematic Suspension & Uprights Suite",
     category: "Vehicle Design",
-    year: "2025",
-    status: "Completed",
+    year: "2026",
+    status: "Design Phase",
     featured: false,
     tagline: "Decoupled roll and heave double-wishbone geometry optimized for transient slalom response.",
-    description: "Complete overhaul of vehicle kinematics. Utilizes Adams Car multi-body simulation and custom mathematical solvers to minimize bump steer to less than 0.05 degrees throughout full suspension travel.",
+    description: "Complete design of vehicle kinematics. Utilizes multi-body simulation and custom mathematical solvers to minimize bump steer to less than 0.05 degrees throughout full suspension travel.",
     heroImage: "/images/projects/project-05.jpg",
     gallery: [
       "/images/projects/project-05-a.jpg"
@@ -150,8 +150,8 @@ export const projectsData = [
     number: "06",
     title: "EcoCombust Variable Intake & Fuel Rig",
     category: "Research",
-    year: "2024",
-    status: "Completed",
+    year: "2026",
+    status: "R&D Phase",
     featured: false,
     tagline: "Dynamometer test rig investigating variable intake runner lengths and biofuels on single-cylinder engines.",
     description: "An academic research testbench engineered inside the Mechanical Engineering lab. Includes computerized throttle actuation, optical encoder crank angle tracking, and high-frequency piezoelectric in-cylinder pressure sensors.",
@@ -168,8 +168,8 @@ export const projectsData = [
     ],
     teamLead: "Elena Rostova & Faculty Advisor",
     highlights: [
-      "Published departmental findings in Student Automotive Engineering Journal",
-      "Demonstrated 11% brake-specific fuel consumption improvement"
+      "Departmental testbed for thermodynamic research and dyno calibration",
+      "Optimized intake runner manifold modeling"
     ]
   },
   {
@@ -177,26 +177,26 @@ export const projectsData = [
     number: "07",
     title: "Apex-Kart Electric Sprint Racer",
     category: "EV",
-    year: "2024",
-    status: "Completed",
+    year: "2026",
+    status: "Fabrication Phase",
     featured: false,
-    tagline: "Sprint electric kart engineered as a training platform for incoming junior engineering members.",
-    description: "A rapid prototyping vehicle created to teach first and second year engineering students fundamentals of chassis tubing bending, sprocket ratios, hydraulic disc caliper bleeding, and electrical safety.",
+    tagline: "Sprint electric kart engineered as a training platform for incoming engineering members.",
+    description: "A rapid prototyping vehicle created to teach engineering students fundamentals of chassis tubing bending, sprocket ratios, hydraulic disc caliper bleeding, and electrical safety.",
     heroImage: "/images/projects/project-07.jpg",
     gallery: [
       "/images/projects/project-07-a.jpg"
     ],
     technologies: ["Chrome-Moly Tubing", "BLDC Motor Controller", "Hydraulic Brakes", "Telemetry Display"],
     specs: [
-      { label: "Drive Motor", value: "15 kW Brushless DC" },
-      { label: "Top Speed", value: "85 km/h" },
-      { label: "Weight", value: "98 kg" },
-      { label: "Battery Pack", value: "48V 40Ah Lithium NMC" }
+      { label: "Chassis", value: "Jig-welded 4130 Chromoly" },
+      { label: "Motor", value: "10 kW Brushless DC" },
+      { label: "Battery", value: "48V 40Ah Lithium Pack" },
+      { label: "Top Speed", value: "70 km/h" }
     ],
-    teamLead: "Sarah Chen & Liam O'Connor",
+    teamLead: "Lucas Rivera & Chloe Dupont",
     highlights: [
-      "Built in 8 weeks as an orientation project for fresh student cohorts",
-      "Finished 2nd overall in Inter-University Student Kart Sprint"
+      "Hands-on platform for training 110+ members in fabrication",
+      "Modular battery bracket for fast paddock swaps"
     ]
   }
 ];
@@ -205,8 +205,8 @@ export const projectCategories = [
   "All",
   "Motorsports",
   "EV",
-  "Vehicle Design",
   "Fabrication",
   "Robotics",
+  "Vehicle Design",
   "Research"
 ];

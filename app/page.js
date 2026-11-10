@@ -7,7 +7,6 @@ import { whatWeDo } from "@/data/services";
 import { projectsData } from "@/data/projects";
 import { eventsData } from "@/data/events";
 import { membersData } from "@/data/members";
-import { achievementsStats } from "@/data/achievements";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
@@ -134,20 +133,20 @@ export default function HomePage() {
           {/* Live Engineering Badges */}
           <div className="mt-14 pt-8 border-t border-[#1f2436]/80 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl w-full text-left">
             <div>
-              <div className="font-mono text-2xl font-black text-white">0-100</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">3.4 Sec Metric</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.activeMembers}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Active Members</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">420 N</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">Aero Downforce</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.establishedYear}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Foundation Year</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">400 V</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">EV Testbed</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.projectsCompleted}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Completed Projects</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">#01</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">National Design</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.competitionsWon}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Competitions Won</div>
             </div>
           </div>
         </div>
@@ -224,10 +223,10 @@ export default function HomePage() {
                 </div>
                 <div>
                   <div className="font-sans text-3xl sm:text-4xl font-extrabold text-white">
-                    8+
+                    {siteConfig.stats.competitionsWon}
                   </div>
                   <div className="font-mono text-xs text-racing-500 uppercase mt-1">
-                    Years Innovation
+                    Competitions Won
                   </div>
                 </div>
               </div>
@@ -494,54 +493,13 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 8. ACHIEVEMENTS & METRICS */}
-      {/* ========================================================= */}
-      <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#0b0c13] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            align="center"
-            eyebrow="// 07 . TRACK RECORD"
-            title="Engineered For Victory"
-            subtitle="Our track podiums, structural design trophies, and national competition recognitions."
-          />
-
-          {/* Huge typography metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {achievementsStats.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-8 rounded bg-[#10131d] border border-[#212638] text-center relative group hover:border-racing-500/60 transition-colors"
-              >
-                <div className="font-sans text-5xl sm:text-6xl font-black text-white group-hover:text-racing-400 transition-colors tracking-tight">
-                  {item.value}
-                </div>
-                <div className="font-mono text-xs font-bold text-racing-500 uppercase mt-2 tracking-wider">
-                  {item.label}
-                </div>
-                <p className="font-sans text-xs text-slate-400 mt-2">
-                  {item.description}
-                </p>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-racing-600 opacity-50 group-hover:w-16 transition-all" />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button href="/achievements" variant="secondary" size="md">
-              View Detailed Timeline & Awards
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 9. GALLERY PREVIEW */}
+      {/* 8. GALLERY PREVIEW */}
       {/* ========================================================= */}
       <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <SectionHeading
-              eyebrow="// 08 . VISUAL ARCHIVE"
+              eyebrow="// 07 . VISUAL ARCHIVE"
               title="Inside The Workshop & Track"
               subtitle="Behind the scenes in the machine bay, aerodynamic wind tunnel testing, and circuit competition."
               className="mb-0"
@@ -561,7 +519,7 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 10. CALL TO ACTION */}
+      {/* 9. CALL TO ACTION */}
       {/* ========================================================= */}
       <section className="relative py-24 lg:py-32 bg-gradient-to-b from-[#0e1018] to-[#08090C] overflow-hidden text-center">
         {/* Decorative Grid Lines */}

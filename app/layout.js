@@ -32,6 +32,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark scroll-smooth">
+      <head>
+        <link rel="preload" as="image" href="/images/hero/hero-car.jpg" fetchPriority="high" />
+      </head>
       <body className="bg-[#08090C] text-slate-100 min-h-screen antialiased flex flex-col font-sans selection:bg-racing-600 selection:text-white">
         {/* Subtle persistent top coordinate line */}
         <div className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-racing-500/40 to-transparent z-50 pointer-events-none" />
