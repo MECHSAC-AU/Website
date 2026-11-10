@@ -11,6 +11,10 @@ export default function ProjectsCarousel() {
   const scrollRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  if (!projectsData || projectsData.length === 0) {
+    return null;
+  }
+
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;

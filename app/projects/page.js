@@ -6,7 +6,8 @@ import ProjectCard from "@/components/ProjectCard";
 import ProjectModal from "@/components/ProjectModal";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
-import { Filter, Search, Layers, Cpu, Wrench } from "lucide-react";
+import { Filter, Search, Wrench, Clock, Layers, ArrowRight } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -44,126 +45,125 @@ export default function ProjectsPage() {
             <div className="inline-flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-racing-500">
-                ENGINEERING PORTFOLIO
+                ENGINEERING FLEET // EST. {siteConfig.establishedYear}
               </span>
             </div>
 
             <h1 className="font-sans text-4xl sm:text-6xl font-black text-white uppercase tracking-tight leading-[1.05]">
-              PRECISION <br />
-              <span className="text-racing-500">PROTOTYPES.</span>
+              PROJECTS ARE <br />
+              <span className="text-racing-500">COMING SOON...</span>
             </h1>
 
             <p className="mt-6 font-sans text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-              Explore our fleet of student-engineered competition racers, electric vehicle testbeds,
-              composite chassis research cells, and autonomous robotics platforms.
+              Established in {siteConfig.establishedYear} under the {siteConfig.departmentName} at{" "}
+              {siteConfig.universityName}, our team of {siteConfig.stats.activeMembers} student engineers is currently
+              designing and simulating our inaugural vehicle fleet.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. Portfolio Grid & Controls */}
+      {/* 2. Portfolio Grid or Coming Soon State */}
       <section className="py-16 bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Controls Bar: Category Filters & Search */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-12 pb-6 border-b border-[#1b1f2e]">
-            {/* Category Pills */}
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-1.5 mr-2 text-xs font-mono text-slate-400">
-                <Filter className="w-3.5 h-3.5 text-racing-500" />
-                <span>FILTER:</span>
+          {projectsData.length > 0 ? (
+            <>
+              {/* Controls Bar: Category Filters & Search */}
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-12 pb-6 border-b border-[#1b1f2e]">
+                {/* Category Pills */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex items-center gap-1.5 mr-2 text-xs font-mono text-slate-400">
+                    <Filter className="w-3.5 h-3.5 text-racing-500" />
+                    <span>FILTER:</span>
+                  </div>
+                  {projectCategories.map((cat) => {
+                    const isActive = activeCategory === cat;
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider rounded-sm transition-all duration-200 ${
+                          isActive
+                            ? "bg-racing-600 text-white border border-racing-500 shadow-[0_0_15px_rgba(225,29,72,0.35)]"
+                            : "bg-[#11141e] text-slate-300 hover:text-white border border-[#212638] hover:border-slate-500"
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Search Input */}
+                <div className="relative w-full lg:w-72">
+                  <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search CAD, CFD, EV..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-4 py-2 bg-[#121520] border border-[#23283c] focus:border-racing-500 rounded-sm text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400 hover:text-white"
+                    >
+                      CLEAR
+                    </button>
+                  )}
+                </div>
               </div>
-              {projectCategories.map((cat) => {
-                const isActive = activeCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider rounded-sm transition-all duration-200 ${
-                      isActive
-                        ? "bg-racing-600 text-white border border-racing-500 shadow-[0_0_15px_rgba(225,29,72,0.35)]"
-                        : "bg-[#11141e] text-slate-300 hover:text-white border border-[#212638] hover:border-slate-500"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
 
-            {/* Search Input */}
-            <div className="relative w-full lg:w-72">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                placeholder="Search CAD, CFD, EV..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#121520] border border-[#23283c] focus:border-racing-500 rounded-sm text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400 hover:text-white"
-                >
-                  CLEAR
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onSelect={(p) => setSelectedProject(p)}
-              />
-            ))}
-          </div>
-
-          {/* Empty state */}
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-20 p-8 rounded bg-[#10121b] border border-[#212638]">
-              <p className="font-mono text-sm text-slate-400">
-                No projects matched your criteria: &quot;{searchQuery}&quot;
+              {/* Projects Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProjects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onSelect={(p) => setSelectedProject(p)}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="max-w-3xl mx-auto p-10 sm:p-16 rounded-sm bg-[#0e1018] border border-[#212638] text-center shadow-2xl">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-racing-500/10 border border-racing-500/30 text-racing-500 mb-5 shadow-[0_0_20px_rgba(225,29,72,0.15)]">
+                <Wrench className="w-8 h-8" />
+              </div>
+              <div className="inline-block px-3 py-1 rounded bg-[#151926] border border-[#252c3e] font-mono text-[10px] text-racing-400 uppercase tracking-widest font-semibold mb-3">
+                R&D IN PROGRESS // EST. {siteConfig.establishedYear}
+              </div>
+              <h2 className="font-sans text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
+                Projects Are Coming...
+              </h2>
+              <p className="mt-4 font-sans text-sm sm:text-base text-slate-300 leading-relaxed font-light">
+                {siteConfig.clubName} is newly established in {siteConfig.establishedYear}. Our squad of{" "}
+                <span className="text-white font-medium">{siteConfig.stats.activeMembers} student engineers</span> across 6 divisions is actively engaged in parametric CAD modeling, CFD simulations, and chassis fabrication across our 13 departmental laboratories.
               </p>
-              <button
-                onClick={() => {
-                  setActiveCategory("All");
-                  setSearchQuery("");
-                }}
-                className="mt-4 font-mono text-xs text-racing-500 hover:underline uppercase"
-              >
-                Reset All Filters
-              </button>
+              <p className="mt-3 font-sans text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Full technical specification sheets, 3D renders, telemetry logs, and vehicle reveal dates will be published here as fabrication advances.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <Button href="/about#laboratories" variant="primary" size="md">
+                  View Our 13 Laboratories
+                </Button>
+                <Button href="/team" variant="secondary" size="md">
+                  Meet The {siteConfig.stats.activeMembers} Members
+                </Button>
+              </div>
             </div>
           )}
-
-          {/* Bottom Technical Collaboration Note */}
-          <div className="mt-20 p-8 rounded-sm bg-[#0e1018] border border-[#212638] text-center max-w-3xl mx-auto">
-            <h3 className="font-sans text-xl font-bold text-white uppercase">
-              Interested in Sponsoring or Research Collaboration?
-            </h3>
-            <p className="mt-2 text-xs sm:text-sm text-slate-400 font-light max-w-xl mx-auto">
-              Our projects receive valuable material, tooling, and software sponsorship from industry partners.
-              Explore our sponsorship tiers or pitch a joint research project with the Department of Mechanical Engineering.
-            </p>
-            <div className="mt-6 flex justify-center gap-4">
-              <Button href="/contact" variant="primary" size="md">
-                Get In Touch
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Project Spec Detail Modal */}
-      <ProjectModal
-        project={selectedProject}
-        isOpen={Boolean(selectedProject)}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Project Spec Modal */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   );
 }

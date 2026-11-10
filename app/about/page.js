@@ -1,4 +1,5 @@
 import { siteConfig } from "@/data/siteConfig";
+import { laboratoriesData } from "@/data/laboratories";
 import SectionHeading from "@/components/SectionHeading";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import Button from "@/components/Button";
@@ -51,29 +52,6 @@ const principles = [
     title: "Innovate Continuously",
     desc: "Yesterday's benchmarks are tomorrow's baseline. We relentlessly refine our CAD geometries, telemetry algorithms, and composite tooling with each new season.",
     icon: Zap,
-  },
-];
-
-const facilities = [
-  {
-    title: "Precision Machining Bay",
-    specs: "3-Axis CNC Mill, Manual Precision Lathes, Surface Grinders",
-    desc: "Equipped for tight-tolerance fabrication of aluminum 7075-T6 uprights, hub spindles, and bespoke drivetrain mounts.",
-  },
-  {
-    title: "Advanced Fabrication & TIG Cell",
-    specs: "Miller Syncrowave TIG, Argon Purging, Tubing Notchers",
-    desc: "Dedicated to 4130 Chromoly tubular chassis triangulation, pedal-box welding, and exhaust collector fabrication.",
-  },
-  {
-    title: "Composite Autoclave & Vacuum Cleanroom",
-    specs: "Vacuum Infusion Pumps, Heat Cure Oven, Prepreg Freezers",
-    desc: "Where our carbon-fiber monocoque panels, undertrays, and front wings are bagged, debulked, and cured.",
-  },
-  {
-    title: "Electronics & Telemetry Workstations",
-    specs: "CAN Bus Analyzers, 4-Channel Oscilloscopes, Soldering Stations",
-    desc: "Development hub for our custom battery management systems, wireless telemetry modules, and sensor harnesses.",
   },
 ];
 
@@ -332,40 +310,61 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. Facilities & Equipment */}
-      <section className="py-20 bg-[#08090C]">
+      {/* 6. Facilities & Laboratories */}
+      <section id="laboratories" className="py-20 bg-[#08090C] scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="// WORKSHOP INFRASTRUCTURE"
-            title="Our R&D Laboratories"
-            subtitle="The specialized machining, welding, composite, and simulation facilities behind our prototypes."
+            eyebrow="// DEPARTMENT INFRASTRUCTURE"
+            title="Department Laboratories"
+            subtitle={`${siteConfig.departmentName}, ${siteConfig.universityName} — 13 specialized engineering laboratories and research centers supporting MECHSAC.`}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {facilities.map((fac, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {laboratoriesData.map((lab, idx) => (
               <div
-                key={idx}
-                className="p-6 sm:p-8 rounded-sm bg-[#0e1018] border border-[#212638] hover:border-racing-500/60 transition-colors"
+                key={lab.id}
+                className="p-6 rounded-sm bg-[#0e1018] border border-[#212638] hover:border-racing-500/60 transition-colors flex flex-col justify-between group"
               >
-                <div className="font-mono text-[10px] text-racing-500 uppercase tracking-wider font-semibold mb-1">
-                  FACILITY BAY 0{idx + 1}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-[10px] text-racing-500 uppercase tracking-wider font-semibold">
+                      LAB // {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-mono text-[9px] text-slate-500 px-2 py-0.5 rounded bg-[#131622] border border-[#202538]">
+                      {lab.code}
+                    </span>
+                  </div>
+
+                  <h3 className="font-sans text-lg font-bold text-white uppercase group-hover:text-racing-400 transition-colors">
+                    {lab.name}
+                  </h3>
+
+                  <div className="mt-2 font-mono text-[11px] text-slate-300 bg-[#141724] border border-[#202538] px-2.5 py-1 rounded inline-block">
+                    {lab.category}
+                  </div>
+
+                  <p className="mt-3 text-xs text-slate-400 leading-relaxed font-light">
+                    {lab.description}
+                  </p>
                 </div>
-                <h3 className="font-sans text-xl font-bold text-white uppercase">
-                  {fac.title}
-                </h3>
-                <div className="mt-2 font-mono text-xs text-slate-300 bg-[#141724] border border-[#202538] px-3 py-1.5 rounded inline-block">
-                  KEY TOOLING: {fac.specs}
+
+                <div className="mt-5 pt-3 border-t border-[#1a1e2d] flex flex-wrap gap-1.5">
+                  {lab.highlights.map((h, i) => (
+                    <span
+                      key={i}
+                      className="font-mono text-[10px] text-slate-400 px-2 py-0.5 rounded bg-[#10131d] border border-[#1b2030]"
+                    >
+                      {h}
+                    </span>
+                  ))}
                 </div>
-                <p className="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed font-light">
-                  {fac.desc}
-                </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-14 text-center">
             <Button href="/team" variant="primary" size="md">
-              Meet The Engineers
+              Meet The {siteConfig.stats.activeMembers} Members
             </Button>
           </div>
         </div>
