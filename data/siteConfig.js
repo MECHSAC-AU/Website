@@ -8,8 +8,8 @@ export const siteConfig = {
   universityName: "Aliah University",
   departmentName: "Department of Mechanical Engineering",
   tagline: "Engineering Motion. Designing The Future.",
-  establishedYear: "2018",
-  contactEmail: "mechsac@aliah.ac.in",
+  establishedYear: "2026",
+  contactEmail: "mechsac.au@gmail.com",
   facultyAdvisor: {
     name: "Dr. [FACULTY COORDINATOR]",
     designation: "Professor & Faculty Advisor",
@@ -32,11 +32,11 @@ export const siteConfig = {
     x: "https://x.com"
   },
   stats: {
-    activeMembers: "55+",
-    projectsCompleted: "14+",
-    competitionsWon: "08",
-    annualEvents: "18+",
-    sponsorsPartners: "12+"
+    activeMembers: "110+",
+    projectsCompleted: "0",
+    competitionsWon: "0",
+    annualEvents: "0",
+    sponsorsPartners: "0"
   },
   theme: {
     accentColor: "#E11D48", // Racing crimson

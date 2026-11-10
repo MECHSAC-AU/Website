@@ -1,22 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import { whatWeDo } from "@/data/services";
-import { projectsData } from "@/data/projects";
 import { eventsData } from "@/data/events";
 import { membersData } from "@/data/members";
-import { achievementsStats } from "@/data/achievements";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
-import ProjectCard from "@/components/ProjectCard";
-import ProjectModal from "@/components/ProjectModal";
 import MemberCard from "@/components/MemberCard";
 import EventCard from "@/components/EventCard";
 import GalleryGrid from "@/components/GalleryGrid";
-import ProjectsCarousel from "@/components/ProjectsCarousel";
 import {
   Compass,
   Wrench,
@@ -34,8 +28,6 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
-  const [selectedProject, setSelectedProject] = useState(null);
-
   // Icon mapping for services
   const getServiceIcon = (iconName) => {
     switch (iconName) {
@@ -56,7 +48,6 @@ export default function HomePage() {
     }
   };
 
-  const featuredProject = projectsData.find((p) => p.featured) || projectsData[0];
   const upcomingEvents = eventsData.upcoming.slice(0, 3);
   const previewMembers = membersData.slice(0, 4);
 
@@ -134,20 +125,20 @@ export default function HomePage() {
           {/* Live Engineering Badges */}
           <div className="mt-14 pt-8 border-t border-[#1f2436]/80 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl w-full text-left">
             <div>
-              <div className="font-mono text-2xl font-black text-white">0-100</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">3.4 Sec Metric</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.activeMembers}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Active Members</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">420 N</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">Aero Downforce</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.establishedYear}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Foundation Year</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">400 V</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">EV Testbed</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.projectsCompleted}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Completed Projects</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">#01</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">National Design</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.competitionsWon}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Competitions Won</div>
             </div>
           </div>
         </div>
@@ -224,10 +215,10 @@ export default function HomePage() {
                 </div>
                 <div>
                   <div className="font-sans text-3xl sm:text-4xl font-extrabold text-white">
-                    8+
+                    {siteConfig.stats.competitionsWon}
                   </div>
                   <div className="font-mono text-xs text-racing-500 uppercase mt-1">
-                    Years Innovation
+                    Competitions Won
                   </div>
                 </div>
               </div>
@@ -295,7 +286,7 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 4. FEATURED PROJECT (CASE STUDY STYLE) */}
+      {/* 4. PROJECTS IN DEVELOPMENT */}
       {/* ========================================================= */}
       <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#0c0d14] relative overflow-hidden">
         {/* Subtle grid bg */}
@@ -309,130 +300,48 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="// 03 . FLAGSHIP ENGINEERING"
-            title="Featured Project"
-            subtitle="An in-depth look at our premier Formula Student competition prototype."
+            align="center"
+            eyebrow="// 03 . ENGINEERING FLEET"
+            title="Projects In Development"
+            subtitle={`Our ${siteConfig.stats.activeMembers} members are currently working on our inaugural vehicle prototypes and mechanical blueprints.`}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-[#10121b] border border-[#23283c] p-6 sm:p-10 rounded-sm shadow-2xl">
-            {/* Visual Column */}
-            <div className="lg:col-span-7 relative">
-              <div className="relative rounded overflow-hidden shadow-2xl border border-[#2b334a]">
-                <ImagePlaceholder
-                  src={featuredProject.heroImage}
-                  alt={featuredProject.title}
-                  aspectRatio="aspect-[16/10]"
-                  type="car"
-                  label="APEX-26 FORMULA PROTOTYPE"
-                  sublabel="CAD Wireframe & Wind Tunnel Visual"
-                />
-
-                {/* Overlay Tag */}
-                <div className="absolute top-4 left-4 z-20">
-                  <span className="font-mono text-[10px] font-bold text-white px-2.5 py-1 rounded bg-black/80 backdrop-blur-md border border-racing-500/60 uppercase">
-                    SEASON // {featuredProject.year}
-                  </span>
-                </div>
-              </div>
+          <div className="max-w-3xl mx-auto p-8 sm:p-14 rounded-sm bg-[#10121b] border border-[#23283c] text-center shadow-2xl relative">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-racing-500/10 border border-racing-500/30 text-racing-500 mb-5 shadow-[0_0_20px_rgba(225,29,72,0.15)]">
+              <Wrench className="w-8 h-8" />
             </div>
-
-            {/* Content Column */}
-            <div className="lg:col-span-5 space-y-6">
-              <div>
-                <span className="font-mono text-xs font-bold text-racing-500 uppercase tracking-widest block mb-1">
-                  01 / FEATURED PROJECT
-                </span>
-                <h3 className="font-sans text-2xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
-                  {featuredProject.title}
-                </h3>
-              </div>
-
-              <p className="text-sm text-slate-300 leading-relaxed font-light">
-                {featuredProject.description}
-              </p>
-
-              {/* Quick Specs List */}
-              <div className="grid grid-cols-2 gap-3 py-2 border-y border-[#1e2335]">
-                {featuredProject.specs.slice(0, 4).map((spec, i) => (
-                  <div key={i}>
-                    <span className="font-mono text-[10px] text-slate-500 uppercase block">
-                      {spec.label}
-                    </span>
-                    <span className="font-sans text-sm font-bold text-white mt-0.5 block">
-                      {spec.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Technologies */}
-              <div>
-                <span className="font-mono text-[11px] text-slate-400 uppercase tracking-wider block mb-2">
-                  TOOLCHAINS & SPECIALIZATIONS:
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {featuredProject.technologies.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="font-mono text-[11px] text-slate-300 px-2.5 py-0.5 rounded bg-[#171b28] border border-[#282f44]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="pt-2 flex items-center gap-3">
-                <Button
-                  variant="primary"
-                  onClick={() => setSelectedProject(featuredProject)}
-                >
-                  View Full Project Specs
-                </Button>
-                <Button variant="ghost" href="/projects">
-                  All Projects
-                </Button>
-              </div>
+            <div className="inline-block px-3 py-1 rounded bg-[#151926] border border-[#252c3e] font-mono text-[10px] text-racing-400 uppercase tracking-widest font-semibold mb-3">
+              INAUGURAL SEASON // EST. {siteConfig.establishedYear}
+            </div>
+            <h3 className="font-sans text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
+              Projects Are Coming...
+            </h3>
+            <p className="mt-4 font-sans text-sm sm:text-base text-slate-300 leading-relaxed font-light">
+              As a newly established organization in {siteConfig.establishedYear}, {siteConfig.clubName} is actively developing our debut competition racers, spaceframe chassis designs, and electric powertrain setups across our 13 departmental laboratories.
+            </p>
+            <p className="mt-3 font-sans text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Full vehicle CAD breakdowns, 3D parametric models, telemetry data, and race reveal dates will be published here as fabrication advances.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Button href="/about#laboratories" variant="primary" size="md">
+                View Our 13 Laboratories
+              </Button>
+              <Button href="/team" variant="secondary" size="md">
+                Meet The {siteConfig.stats.activeMembers} Members
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================= */}
-      {/* 5. PROJECTS HORIZONTAL SHOWCASE */}
+      {/* 5. UPCOMING EVENTS */}
       {/* ========================================================= */}
       <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
-            <SectionHeading
-              eyebrow="// 04 . VEHICLE SHOWCASE"
-              title="Explore Our Fleet"
-              subtitle="From high-downforce open-wheel racers to high-voltage electric platforms and autonomous rovers."
-              className="mb-0"
-            />
-            <Button
-              href="/projects"
-              variant="outline"
-              size="sm"
-              className="mt-4 md:mt-0 self-start md:self-end"
-            >
-              View Full Portfolio
-            </Button>
-          </div>
-
-          <ProjectsCarousel />
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 6. UPCOMING EVENTS */}
-      {/* ========================================================= */}
-      <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#0c0d14]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <SectionHeading
-              eyebrow="// 05 . TRACK & WORKSHOPS"
+              eyebrow="// 04 . CALENDAR"
               title="Upcoming Events"
               subtitle="Stay connected with our vehicle unveilings, CFD masterclasses, dyno tests, and engineering sprints."
               className="mb-0"
@@ -464,13 +373,13 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 7. TEAM PREVIEW */}
+      {/* 6. TEAM PREVIEW */}
       {/* ========================================================= */}
       <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <SectionHeading
-              eyebrow="// 06 . THE ENGINEERS"
+              eyebrow="// 05 . THE ENGINEERS"
               title="Team Leadership"
               subtitle="The student engineers, designers, and telemetry specialists driving our organization forward."
               className="mb-0"
@@ -494,54 +403,13 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 8. ACHIEVEMENTS & METRICS */}
-      {/* ========================================================= */}
-      <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#0b0c13] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            align="center"
-            eyebrow="// 07 . TRACK RECORD"
-            title="Engineered For Victory"
-            subtitle="Our track podiums, structural design trophies, and national competition recognitions."
-          />
-
-          {/* Huge typography metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {achievementsStats.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-8 rounded bg-[#10131d] border border-[#212638] text-center relative group hover:border-racing-500/60 transition-colors"
-              >
-                <div className="font-sans text-5xl sm:text-6xl font-black text-white group-hover:text-racing-400 transition-colors tracking-tight">
-                  {item.value}
-                </div>
-                <div className="font-mono text-xs font-bold text-racing-500 uppercase mt-2 tracking-wider">
-                  {item.label}
-                </div>
-                <p className="font-sans text-xs text-slate-400 mt-2">
-                  {item.description}
-                </p>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-racing-600 opacity-50 group-hover:w-16 transition-all" />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button href="/achievements" variant="secondary" size="md">
-              View Detailed Timeline & Awards
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 9. GALLERY PREVIEW */}
+      {/* 7. GALLERY PREVIEW */}
       {/* ========================================================= */}
       <section className="py-20 lg:py-28 border-b border-[#1b1f2e] bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <SectionHeading
-              eyebrow="// 08 . VISUAL ARCHIVE"
+              eyebrow="// 06 . VISUAL ARCHIVE"
               title="Inside The Workshop & Track"
               subtitle="Behind the scenes in the machine bay, aerodynamic wind tunnel testing, and circuit competition."
               className="mb-0"
@@ -561,7 +429,7 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 10. CALL TO ACTION */}
+      {/* 8. CALL TO ACTION */}
       {/* ========================================================= */}
       <section className="relative py-24 lg:py-32 bg-gradient-to-b from-[#0e1018] to-[#08090C] overflow-hidden text-center">
         {/* Decorative Grid Lines */}
@@ -599,13 +467,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Spec details modal */}
-      <ProjectModal
-        project={selectedProject}
-        isOpen={Boolean(selectedProject)}
-        onClose={() => setSelectedProject(null)}
-      />
     </div>
   );
 }

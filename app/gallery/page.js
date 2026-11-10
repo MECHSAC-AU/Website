@@ -1,6 +1,7 @@
 import GalleryGrid from "@/components/GalleryGrid";
 import SectionHeading from "@/components/SectionHeading";
 import { Camera, Image as ImageIcon } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
 
 export const metadata = {
   title: "Photo & Media Gallery",
@@ -26,18 +27,18 @@ export default function GalleryPage() {
             <div className="inline-flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-racing-500">
-                PHOTOGRAPHIC ARCHIVE
+                PHOTOGRAPHIC ARCHIVE // EST. {siteConfig.establishedYear}
               </span>
             </div>
 
             <h1 className="font-sans text-4xl sm:text-6xl font-black text-white uppercase tracking-tight leading-[1.05]">
-              VISUAL <br />
-              <span className="text-racing-500">TELEMETRY.</span>
+              PHOTO &amp; MEDIA <br />
+              <span className="text-racing-500">GALLERY.</span>
             </h1>
 
             <p className="mt-6 font-sans text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-              Photographic documentation of our manufacturing processes, wind tunnel testing,
-              late nights in the machine shop, and adrenaline on the race circuit.
+              Official photographic documentation of our machine shop fabrication, laboratory testing,
+              and team milestones across {siteConfig.universityName}.
             </p>
           </div>
         </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useRef, useEffect } from "react";
 import { Wrench, Car, User, Calendar, Camera, Shield, Award, Cpu } from "lucide-react";
 
 export default function ImagePlaceholder({
@@ -16,7 +15,14 @@ export default function ImagePlaceholder({
   fill = false
 }) {
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!priority);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoading(false);
+    }
+  }, [src]);
 
   const getIcon = () => {
     switch (type) {
@@ -63,18 +69,21 @@ export default function ImagePlaceholder({
       {/* Render actual image if not errored */}
       {!hasError && src && (
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
           onLoad={() => setIsLoading(false)}
           onError={() => setHasError(true)}
           className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-            isLoading ? "opacity-0" : "opacity-100"
+            !priority && isLoading ? "opacity-0" : "opacity-100"
           }`}
         />
       )}
 
-      {/* Fallback graphic if image errors or while loading */}
+      {/* Fallback graphic if image errors or missing */}
       {(hasError || !src) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10 bg-gradient-to-br from-[#10131d] via-[#0b0d13] to-[#08090d]">
           <div className="relative mb-3 flex items-center justify-center w-14 h-14 rounded-full bg-[#151926] border border-[#262c3e] shadow-[0_0_15px_rgba(225,29,72,0.15)] group-hover:border-racing-500/50 transition-colors">
