@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { eventsData, eventCategories } from "@/data/events";
+import { siteConfig } from "@/data/siteConfig";
 import EventCard from "@/components/EventCard";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
@@ -42,18 +43,18 @@ export default function EventsPage() {
             <div className="inline-flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-racing-500 animate-pulse" />
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-racing-500">
-                SCHEDULE & RECAPS
+                SCHEDULE &amp; CALENDAR // EST. {siteConfig.establishedYear}
               </span>
             </div>
 
             <h1 className="font-sans text-4xl sm:text-6xl font-black text-white uppercase tracking-tight leading-[1.05]">
-              EVENTS & <br />
-              <span className="text-racing-500">TRACK SESSIONS.</span>
+              EVENTS &amp; <br />
+              <span className="text-racing-500">SCHEDULE.</span>
             </h1>
 
             <p className="mt-6 font-sans text-base sm:text-xl text-slate-300 font-light leading-relaxed">
-              Explore upcoming masterclasses, technical seminars, dynamic track trials,
-              and archive recaps from past national competitions.
+              Official schedule for our grand inauguration, upcoming workshops,
+              technical seminars, and departmental sessions at {siteConfig.universityName}.
             </p>
           </div>
         </div>
@@ -101,7 +102,7 @@ export default function EventsPage() {
               <SectionHeading
                 eyebrow="// FORTHCOMING"
                 title="Upcoming Events"
-                subtitle="Reserve your seat for upcoming vehicle rollouts, guest lectures, and student software masterclasses."
+                subtitle={`Stay tuned for upcoming events under the Department of Mechanical Engineering at ${siteConfig.universityName}.`}
               />
 
               <div className="space-y-6">
@@ -117,19 +118,36 @@ export default function EventsPage() {
           )}
 
           {/* Past Events Section */}
-          {(activeTab === "all" || activeTab === "past") && (
+          {(activeTab === "past" || (activeTab === "all" && eventsData.past.length > 0)) && (
             <div>
               <SectionHeading
                 eyebrow="// HISTORICAL LOG"
-                title="Past Events & Competition Recaps"
-                subtitle="Relive our previous track tests, machine shop workshops, and department conferences."
+                title="Past Events & Recaps"
+                subtitle="Archive of our previous track tests, machine shop workshops, and department sessions."
               />
 
-              <div className="space-y-6">
-                {eventsData.past.map((event) => (
-                  <EventCard key={event.id} event={event} isPast={true} />
-                ))}
-              </div>
+              {eventsData.past.length > 0 ? (
+                <div className="space-y-6">
+                  {eventsData.past.map((event) => (
+                    <EventCard key={event.id} event={event} isPast={true} />
+                  ))}
+                </div>
+              ) : (
+                <div className="max-w-2xl mx-auto p-8 sm:p-12 rounded-sm bg-[#0e1018] border border-[#212638] text-center shadow-xl">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-racing-500/10 border border-racing-500/30 text-racing-500 mb-5">
+                    <Calendar className="w-7 h-7" />
+                  </div>
+                  <div className="inline-block px-3 py-1 rounded bg-[#151926] border border-[#252c3e] font-mono text-[10px] text-racing-400 uppercase tracking-widest font-semibold mb-3">
+                    INAUGURAL SEASON // EST. {siteConfig.establishedYear}
+                  </div>
+                  <h3 className="font-sans text-2xl font-bold text-white uppercase tracking-tight">
+                    No Past Events Yet
+                  </h3>
+                  <p className="mt-4 font-sans text-sm text-slate-300 leading-relaxed font-light">
+                    {siteConfig.clubName} is newly established in {siteConfig.establishedYear}. Event recaps, presentations, and technical documentation will be archived here following our Grand Inauguration and upcoming semester activities.
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -175,7 +193,7 @@ export default function EventsPage() {
             ) : (
               <form onSubmit={handleRegister} className="space-y-4">
                 <div className="p-3 rounded bg-[#131724] border border-[#212638] text-xs font-mono text-slate-300 space-y-1">
-                  <div>DATE: {registerModalEvent.date} ({registerModalEvent.time})</div>
+                  <div>DATE: {registerModalEvent.date} {registerModalEvent.time ? `• ${registerModalEvent.time}` : ""}</div>
                   <div>VENUE: {registerModalEvent.location}</div>
                   <div>CAPACITY: {registerModalEvent.seats}</div>
                 </div>

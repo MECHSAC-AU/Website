@@ -343,7 +343,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="// 04 . CALENDAR"
               title="Upcoming Events"
-              subtitle="Stay connected with our vehicle unveilings, CFD masterclasses, dyno tests, and engineering sprints."
+              subtitle="Stay connected with our grand inauguration, upcoming workshops, and departmental engineering initiatives."
               className="mb-0"
             />
             <Button

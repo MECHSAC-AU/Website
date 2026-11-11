@@ -20,12 +20,12 @@ export default function EventCard({ event, onRegisterClick, isPast = false }) {
         />
 
         {/* Floating Date Badge */}
-        <div className="absolute top-3 left-3 z-20 flex flex-col items-center justify-center w-14 h-14 bg-black/85 backdrop-blur-md border border-racing-500/50 rounded-sm text-center shadow-lg">
-          <span className="font-sans text-lg font-black text-white leading-none">
-            {event.day || "28"}
+        <div className="absolute top-3 left-3 z-20 flex flex-col items-center justify-center w-14 h-14 bg-black/90 backdrop-blur-md border border-racing-500/50 rounded-sm text-center shadow-lg">
+          <span className="font-sans text-base font-black text-white leading-none">
+            {event.day || "TBA"}
           </span>
-          <span className="font-mono text-[9px] font-bold text-racing-500 uppercase leading-tight tracking-wider mt-0.5">
-            {event.month || "OCT"}
+          <span className="font-mono text-[8px] font-bold text-racing-500 uppercase leading-tight tracking-wider mt-1">
+            {event.month || "DATE"}
           </span>
         </div>
 
@@ -42,6 +42,12 @@ export default function EventCard({ event, onRegisterClick, isPast = false }) {
         <div>
           {/* Metadata badges */}
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400 mb-2">
+            {event.date && (
+              <span className="flex items-center gap-1.5 text-racing-400 font-medium">
+                <Calendar className="w-3.5 h-3.5 text-racing-500" />
+                {event.date}
+              </span>
+            )}
             {event.time && (
               <span className="flex items-center gap-1.5 text-slate-300">
                 <Clock className="w-3.5 h-3.5 text-racing-500" />
