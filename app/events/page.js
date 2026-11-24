@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { eventsData, eventCategories } from "@/data/events";
+import { getLiveEvents } from "@/lib/api/public";
 import { siteConfig } from "@/data/siteConfig";
 import EventCard from "@/components/EventCard";
 import SectionHeading from "@/components/SectionHeading";
@@ -9,20 +10,60 @@ import Button from "@/components/Button";
 import { Calendar, MapPin, Clock, Tag, ArrowRight, CheckCircle, X } from "lucide-react";
 
 export default function EventsPage() {
+  const [events, setEvents] = useState(eventsData);
   const [activeTab, setActiveTab] = useState("all"); // 'all' | 'upcoming' | 'past'
   const [registerModalEvent, setRegisterModalEvent] = useState(null);
   const [registeredSuccess, setRegisteredSuccess] = useState(false);
+  const [registerName, setRegisterName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registerError, setRegisterError] = useState(null);
 
-  const handleRegister = (e) => {
+  useEffect(() => {
+    getLiveEvents().then((data) => {
+      if (data && (data.upcoming?.length > 0 || data.past?.length > 0)) {
+        setEvents(data);
+      }
+    });
+  }, []);
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (!registerEmail) return;
-    setRegisteredSuccess(true);
-    setTimeout(() => {
-      setRegisteredSuccess(false);
-      setRegisterModalEvent(null);
-      setRegisterEmail("");
-    }, 2500);
+    if (!registerEmail.trim() || !registerName.trim() || !registerModalEvent) return;
+
+    setIsSubmitting(true);
+    setRegisterError(null);
+
+    try {
+      const res = await fetch("/api/event-registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event_id: registerModalEvent.id,
+          event_title: registerModalEvent.title,
+          name: registerName.trim(),
+          email: registerEmail.trim(),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to register for event");
+      }
+
+      setRegisteredSuccess(true);
+      setTimeout(() => {
+        setRegisteredSuccess(false);
+        setRegisterModalEvent(null);
+        setRegisterName("");
+        setRegisterEmail("");
+      }, 3000);
+    } catch (err) {
+      console.error("Event registration error:", err);
+      setRegisterError(err.message || "Failed to register. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,7 +113,7 @@ export default function EventsPage() {
                   : "bg-[#11141e] text-slate-300 hover:text-white border border-[#212638]"
               }`}
             >
-              All Events ({eventsData.upcoming.length + eventsData.past.length})
+              All Events ({events.upcoming.length + events.past.length})
             </button>
             <button
               onClick={() => setActiveTab("upcoming")}
@@ -82,7 +123,7 @@ export default function EventsPage() {
                   : "bg-[#11141e] text-slate-300 hover:text-white border border-[#212638]"
               }`}
             >
-              Upcoming ({eventsData.upcoming.length})
+              Upcoming ({events.upcoming.length})
             </button>
             <button
               onClick={() => setActiveTab("past")}
@@ -92,7 +133,7 @@ export default function EventsPage() {
                   : "bg-[#11141e] text-slate-300 hover:text-white border border-[#212638]"
               }`}
             >
-              Past Archive ({eventsData.past.length})
+              Past Archive ({events.past.length})
             </button>
           </div>
 
@@ -106,7 +147,7 @@ export default function EventsPage() {
               />
 
               <div className="space-y-6">
-                {eventsData.upcoming.map((event) => (
+                {events.upcoming.map((event) => (
                   <EventCard
                     key={event.id}
                     event={event}
@@ -118,7 +159,7 @@ export default function EventsPage() {
           )}
 
           {/* Past Events Section */}
-          {(activeTab === "past" || (activeTab === "all" && eventsData.past.length > 0)) && (
+          {(activeTab === "past" || (activeTab === "all" && events.past.length > 0)) && (
             <div>
               <SectionHeading
                 eyebrow="// HISTORICAL LOG"
@@ -126,9 +167,9 @@ export default function EventsPage() {
                 subtitle="Archive of our previous track tests, machine shop workshops, and department sessions."
               />
 
-              {eventsData.past.length > 0 ? (
+              {events.past.length > 0 ? (
                 <div className="space-y-6">
-                  {eventsData.past.map((event) => (
+                  {events.past.map((event) => (
                     <EventCard key={event.id} event={event} isPast={true} />
                   ))}
                 </div>
@@ -192,6 +233,12 @@ export default function EventsPage() {
               </div>
             ) : (
               <form onSubmit={handleRegister} className="space-y-4">
+                {registerError && (
+                  <div className="p-2.5 rounded bg-racing-950/60 border border-racing-500/50 text-xs font-mono text-racing-300">
+                    {registerError}
+                  </div>
+                )}
+
                 <div className="p-3 rounded bg-[#131724] border border-[#212638] text-xs font-mono text-slate-300 space-y-1">
                   <div>DATE: {registerModalEvent.date} {registerModalEvent.time ? `• ${registerModalEvent.time}` : ""}</div>
                   <div>VENUE: {registerModalEvent.location}</div>
@@ -205,6 +252,8 @@ export default function EventsPage() {
                   <input
                     type="text"
                     required
+                    value={registerName}
+                    onChange={(e) => setRegisterName(e.target.value)}
                     placeholder="e.g. Jordan Hayes"
                     className="w-full px-3.5 py-2.5 bg-[#141724] border border-[#262c3e] focus:border-racing-500 rounded-sm text-xs text-white placeholder-slate-500 focus:outline-none"
                   />
@@ -232,8 +281,8 @@ export default function EventsPage() {
                   >
                     Cancel
                   </button>
-                  <Button type="submit" variant="primary" size="md">
-                    Confirm Seat
+                  <Button type="submit" variant="primary" size="md" disabled={isSubmitting}>
+                    {isSubmitting ? "Registering..." : "Confirm Seat"}
                   </Button>
                 </div>
               </form>

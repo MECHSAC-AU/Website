@@ -42,7 +42,7 @@ export default function MemberCard({ member }) {
           </p>
 
           <p className="mt-2 text-xs text-slate-400 font-mono text-[11px] bg-[#141724] border border-[#23283c] p-2 rounded">
-            FOCUS: {member.specialization}
+            FOCUS: {member.specialization || member.focus || "Automotive Engineering"}
           </p>
 
           {member.bio && (
@@ -59,9 +59,9 @@ export default function MemberCard({ member }) {
           </span>
 
           <div className="flex items-center gap-2">
-            {member.social?.linkedin && (
+            {(member.social?.linkedin || member.linkedin) && (
               <a
-                href={member.social.linkedin}
+                href={member.social?.linkedin || member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-1.5 rounded bg-[#161a27] hover:bg-racing-600/20 text-slate-400 hover:text-white transition-colors border border-[#23283c] hover:border-racing-500"
@@ -70,9 +70,9 @@ export default function MemberCard({ member }) {
                 <Linkedin className="w-3.5 h-3.5" />
               </a>
             )}
-            {member.social?.github && (
+            {(member.social?.github || member.github) && (
               <a
-                href={member.social.github}
+                href={member.social?.github || member.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-1.5 rounded bg-[#161a27] hover:bg-racing-600/20 text-slate-400 hover:text-white transition-colors border border-[#23283c] hover:border-racing-500"
@@ -81,9 +81,9 @@ export default function MemberCard({ member }) {
                 <Github className="w-3.5 h-3.5" />
               </a>
             )}
-            {member.social?.email && (
+            {(member.social?.email || member.email) && (
               <a
-                href={`mailto:${member.social.email}`}
+                href={`mailto:${member.social?.email || member.email}`}
                 className="p-1.5 rounded bg-[#161a27] hover:bg-racing-600/20 text-slate-400 hover:text-white transition-colors border border-[#23283c] hover:border-racing-500"
                 aria-label={`${member.name} Email`}
               >

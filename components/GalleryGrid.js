@@ -2,18 +2,34 @@
 
 import { useState, useEffect } from "react";
 import { galleryData, galleryCategories } from "@/data/gallery";
+import { getLiveGallery } from "@/lib/api/public";
 import ImagePlaceholder from "./ImagePlaceholder";
 import { X, ChevronLeft, ChevronRight, Maximize2, Tag, Calendar, Camera } from "lucide-react";
 
 export default function GalleryGrid({ initialCategory = "All", limit = null }) {
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [gallery, setGallery] = useState(galleryData);
+
+  useEffect(() => {
+    getLiveGallery().then((data) => {
+      if (data && data.length > 0) {
+        setGallery(data);
+      }
+    });
+  }, []);
+
+  const dynamicCategories = [
+    "All",
+    ...Array.from(new Set(gallery.map((i) => i.category).filter(Boolean))),
+  ];
+  const categoriesList = dynamicCategories.length > 1 ? dynamicCategories : galleryCategories;
 
   // Filter images based on category
   const filteredImages =
     activeCategory === "All"
-      ? galleryData
-      : galleryData.filter((item) => item.category === activeCategory);
+      ? gallery
+      : gallery.filter((item) => item.category === activeCategory);
 
   const displayedImages = limit ? filteredImages.slice(0, limit) : filteredImages;
 
@@ -64,9 +80,9 @@ export default function GalleryGrid({ initialCategory = "All", limit = null }) {
   return (
     <div>
       {/* Category Filter Pills (if more than 1 category and not limited) */}
-      {!limit && galleryCategories.length > 1 && (
+      {!limit && categoriesList.length > 1 && (
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          {galleryCategories.map((cat) => {
+          {categoriesList.map((cat) => {
             const isActive = activeCategory === cat;
             return (
               <button

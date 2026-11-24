@@ -2,8 +2,7 @@ import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
 import { siteConfig } from "@/data/siteConfig";
-import { sponsorsData } from "@/data/sponsors";
-import { contributorsData } from "@/data/contributors";
+import { getLiveSponsors, getLiveContributors } from "@/lib/api/public";
 import ContributorCard from "@/components/ContributorCard";
 import {
   ShieldCheck,
@@ -22,7 +21,11 @@ export const metadata = {
   description: `Official sponsors and corporate partners of ${siteConfig.clubName} at ${siteConfig.universityName}. Explore partnership opportunities.`,
 };
 
-export default function SponsorsPage() {
+export default async function SponsorsPage() {
+  const [sponsors, contributors] = await Promise.all([
+    getLiveSponsors(),
+    getLiveContributors(),
+  ]);
   return (
     <div className="pb-24">
       {/* 1. Hero Section */}
@@ -104,9 +107,9 @@ export default function SponsorsPage() {
             subtitle={`Industry organizations and corporate partners empowering student automotive engineering at ${siteConfig.universityName}.`}
           />
 
-          {sponsorsData.length > 0 ? (
+          {sponsors.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sponsorsData.map((sponsor) => (
+              {sponsors.map((sponsor) => (
                 <div
                   key={sponsor.id}
                   className="p-8 rounded-sm bg-[#0e1018] border border-[#212638] hover:border-racing-500/70 transition-all duration-300 flex flex-col justify-between group"
@@ -211,9 +214,9 @@ export default function SponsorsPage() {
             </Button>
           </div>
 
-          {contributorsData.length > 0 ? (
+          {contributors.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {contributorsData.slice(0, 3).map((contributor) => (
+              {contributors.slice(0, 3).map((contributor) => (
                 <ContributorCard key={contributor.id} contributor={contributor} />
               ))}
             </div>

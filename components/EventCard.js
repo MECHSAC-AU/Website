@@ -8,14 +8,14 @@ export default function EventCard({ event, onRegisterClick, isPast = false }) {
   return (
     <div className="group relative bg-[#0f1118] border border-[#212638] hover:border-racing-500/70 rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_12px_30px_rgba(225,29,72,0.12)] flex flex-col md:flex-row">
       {/* Visual / Date badge column */}
-      <div className="relative md:w-72 lg:w-80 shrink-0 overflow-hidden bg-[#0c0e14]">
+      <div className="relative w-full aspect-[16/10] md:aspect-auto md:w-72 lg:w-80 md:min-h-[220px] shrink-0 overflow-hidden bg-[#0c0e14]">
         <ImagePlaceholder
           src={event.image}
           alt={event.title}
           aspectRatio="aspect-[16/10] md:aspect-auto"
           fill
           type="event"
-          label={event.category.toUpperCase()}
+          label={event.category ? event.category.toUpperCase() : "EVENT"}
           sublabel={event.date}
         />
 

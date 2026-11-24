@@ -1,10 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import { whatWeDo } from "@/data/services";
 import { eventsData } from "@/data/events";
 import { membersData } from "@/data/members";
+import { getLiveEvents, getLiveMembers } from "@/lib/api/public";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
@@ -48,8 +50,24 @@ export default function HomePage() {
     }
   };
 
-  const upcomingEvents = eventsData.upcoming.slice(0, 3);
-  const previewMembers = membersData.slice(0, 4);
+  const [events, setEvents] = useState(eventsData);
+  const [members, setMembers] = useState(membersData);
+
+  useEffect(() => {
+    getLiveEvents().then((data) => {
+      if (data && data.upcoming?.length > 0) {
+        setEvents(data);
+      }
+    });
+    getLiveMembers().then((data) => {
+      if (data && data.length > 0) {
+        setMembers(data);
+      }
+    });
+  }, []);
+
+  const upcomingEvents = events.upcoming.slice(0, 3);
+  const previewMembers = members.slice(0, 4);
 
   return (
     <div className="relative">
@@ -362,9 +380,7 @@ export default function HomePage() {
                 key={event.id}
                 event={event}
                 onRegisterClick={() => {
-                  window.location.href = `/contact?subject=${encodeURIComponent(
-                    `Registration: ${event.title}`
-                  )}`;
+                  window.location.href = "/events";
                 }}
               />
             ))}

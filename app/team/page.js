@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { membersData, memberCategories } from "@/data/members";
+import { getLiveMembers } from "@/lib/api/public";
 import MemberCard from "@/components/MemberCard";
 import SectionHeading from "@/components/SectionHeading";
 import Button from "@/components/Button";
@@ -10,11 +11,27 @@ import Link from "next/link";
 
 export default function TeamPage() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [members, setMembers] = useState(membersData);
+
+  useEffect(() => {
+    getLiveMembers().then((data) => {
+      if (data && data.length > 0) {
+        setMembers(data);
+      }
+    });
+  }, []);
+
+  // Compute categories dynamically based on loaded members, falling back to predefined categories
+  const dynamicCategories = [
+    "All",
+    ...Array.from(new Set(members.map((m) => m.category).filter(Boolean))),
+  ];
+  const categoriesList = dynamicCategories.length > 1 ? dynamicCategories : memberCategories;
 
   const filteredMembers =
     activeCategory === "All"
-      ? membersData
-      : membersData.filter((member) => member.category === activeCategory);
+      ? members
+      : members.filter((member) => member.category === activeCategory);
 
   return (
     <div className="pb-24">
@@ -60,7 +77,7 @@ export default function TeamPage() {
               <Filter className="w-3.5 h-3.5 text-racing-500" />
               <span>DIVISIONS:</span>
             </div>
-            {memberCategories.map((cat) => {
+            {categoriesList.map((cat) => {
               const isActive = activeCategory === cat;
               return (
                 <button

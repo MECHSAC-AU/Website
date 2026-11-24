@@ -18,11 +18,14 @@ export default function ImagePlaceholder({
   const [isLoading, setIsLoading] = useState(!priority);
   const imgRef = useRef(null);
 
+  // Reset error & loading states whenever the image src changes
   useEffect(() => {
+    setHasError(false);
+    setIsLoading(!priority);
     if (imgRef.current && imgRef.current.complete) {
       setIsLoading(false);
     }
-  }, [src]);
+  }, [src, priority]);
 
   const getIcon = () => {
     switch (type) {
@@ -47,8 +50,8 @@ export default function ImagePlaceholder({
 
   return (
     <div
-      className={`relative overflow-hidden bg-[#0c0e14] border border-[#212638] rounded-sm group select-none ${
-        fill ? "w-full h-full" : aspectRatio
+      className={`overflow-hidden bg-[#0c0e14] border border-[#212638] rounded-sm group select-none ${
+        fill ? "absolute inset-0 w-full h-full" : `relative ${aspectRatio}`
       } ${className}`}
     >
       {/* Corner crosshair markers */}
@@ -75,11 +78,15 @@ export default function ImagePlaceholder({
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
           decoding={priority ? "sync" : "async"}
-          onLoad={() => setIsLoading(false)}
-          onError={() => setHasError(true)}
-          className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-            !priority && isLoading ? "opacity-0" : "opacity-100"
-          }`}
+          onLoad={() => {
+            setIsLoading(false);
+            setHasError(false);
+          }}
+          onError={() => {
+            setHasError(true);
+            setIsLoading(false);
+          }}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       )}
 
@@ -90,7 +97,7 @@ export default function ImagePlaceholder({
             {getIcon()}
           </div>
           <div className="font-mono text-[10px] tracking-widest text-racing-500 font-semibold uppercase mb-1">
-            PLACEHOLDER — {label}
+            {label}
           </div>
           <p className="font-sans text-xs font-medium text-slate-300 max-w-[280px] line-clamp-1">
             {alt}
@@ -101,7 +108,7 @@ export default function ImagePlaceholder({
             </span>
           )}
           <span className="mt-2 text-[9px] font-mono text-slate-600 px-2 py-0.5 rounded bg-[#131622] border border-[#1f2434]">
-            SRC: {src || "LOCAL ASSET"}
+            SRC: {src ? "REMOTE ASSET" : "NO IMAGE"}
           </span>
         </div>
       )}

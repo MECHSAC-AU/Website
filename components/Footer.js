@@ -192,6 +192,10 @@ export default function Footer() {
             <Link href="/contact" className="hover:text-slate-300 transition-colors">
               Workshop Safety
             </Link>
+            <span className="h-3 w-[1px] bg-slate-800" />
+            <Link href="/admin" className="hover:text-racing-400 transition-colors">
+              Admin Portal
+            </Link>
           </div>
         </div>
       </div>

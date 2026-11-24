@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import ContributorCard from "@/components/ContributorCard";
 import { siteConfig } from "@/data/siteConfig";
 import { contributorsData } from "@/data/contributors";
+import { getLiveContributors } from "@/lib/api/public";
 import {
   Heart,
   Search,
@@ -16,7 +17,16 @@ import {
 } from "lucide-react";
 
 export default function ContributorsPage() {
+  const [contributors, setContributors] = useState(contributorsData);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    getLiveContributors().then((data) => {
+      if (data && data.length > 0) {
+        setContributors(data);
+      }
+    });
+  }, []);
 
   // Clean placeholder examples when actual information is unavailable
   const placeholderCards = [
@@ -56,7 +66,7 @@ export default function ContributorsPage() {
   ];
 
   // Filter contributors by search query only (no categories)
-  const filteredContributors = contributorsData.filter((c) => {
+  const filteredContributors = contributors.filter((c) => {
     const matchesSearch =
       c.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.designation?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -134,7 +144,7 @@ export default function ContributorsPage() {
       <section className="py-16 bg-[#08090C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Search bar when contributors exist */}
-          {contributorsData.length > 0 && (
+          {contributors.length > 0 && (
             <div className="flex items-center justify-between gap-4 mb-10 pb-6 border-b border-[#1b1f2e]">
               <div className="text-xs font-mono text-slate-400">
                 SHOWING {filteredContributors.length} CONTRIBUTOR{filteredContributors.length === 1 ? "" : "S"}

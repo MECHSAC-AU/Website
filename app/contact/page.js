@@ -29,6 +29,7 @@ export default function ContactPage() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   // Pre-fill subject if directed with hash or query
   useEffect(() => {
@@ -72,16 +73,31 @@ export default function ContactPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate frontend submission delay
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit message");
+      }
       setIsSubmitted(true);
-    }, 1000);
+    } catch (err) {
+      console.error("Submission error:", err);
+      setSubmitError(err.message || "Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -93,6 +109,7 @@ export default function ContactPage() {
       message: "",
     });
     setErrors({});
+    setSubmitError(null);
     setIsSubmitted(false);
   };
 
@@ -266,6 +283,11 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                    {submitError && (
+                      <div className="p-3 rounded bg-racing-950/60 border border-racing-500/50 text-xs font-mono text-racing-300">
+                        {submitError}
+                      </div>
+                    )}
                     {/* Name & Email Row */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
