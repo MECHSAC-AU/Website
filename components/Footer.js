@@ -75,7 +75,7 @@ export default function Footer() {
                 { label: "Engineering Projects", href: "/projects" },
                 { label: "Upcoming Events", href: "/events" },
                 { label: "Photo Gallery", href: "/gallery" },
-                { label: "Achievements & Awards", href: "/achievements" },
+                { label: "Sponsors & Contributors", href: "/sponsors" },
                 { label: "Contact & Bay Access", href: "/contact" },
               ].map((link) => (
                 <li key={link.href}>

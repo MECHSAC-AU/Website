@@ -137,8 +137,8 @@ export default function HomePage() {
               <div className="font-mono text-[11px] text-racing-500 uppercase">Completed Projects</div>
             </div>
             <div>
-              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.competitionsWon}</div>
-              <div className="font-mono text-[11px] text-racing-500 uppercase">Competitions Won</div>
+              <div className="font-mono text-2xl font-black text-white">{siteConfig.stats.laboratories}</div>
+              <div className="font-mono text-[11px] text-racing-500 uppercase">Department Labs</div>
             </div>
           </div>
         </div>
@@ -215,10 +215,10 @@ export default function HomePage() {
                 </div>
                 <div>
                   <div className="font-sans text-3xl sm:text-4xl font-extrabold text-white">
-                    {siteConfig.stats.competitionsWon}
+                    {siteConfig.stats.laboratories}
                   </div>
                   <div className="font-mono text-xs text-racing-500 uppercase mt-1">
-                    Competitions Won
+                    Research Labs
                   </div>
                 </div>
               </div>

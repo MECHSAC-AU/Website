@@ -10,6 +10,9 @@ export const siteConfig = {
   tagline: "Engineering Motion. Designing The Future.",
   establishedYear: "2026",
   contactEmail: "mechsac.au@gmail.com",
+  contact: {
+    email: "mechsac.au@gmail.com",
+  },
   facultyAdvisor: {
     name: "Dr. [FACULTY COORDINATOR]",
     designation: "Professor & Faculty Advisor",
@@ -34,9 +37,9 @@ export const siteConfig = {
   stats: {
     activeMembers: "110+",
     projectsCompleted: "0",
-    competitionsWon: "0",
     annualEvents: "0",
-    sponsorsPartners: "0"
+    sponsorsPartners: "0",
+    laboratories: "13"
   },
   theme: {
     accentColor: "#E11D48", // Racing crimson
