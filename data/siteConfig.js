@@ -14,12 +14,13 @@ export const siteConfig = {
     email: "mechsac.au@gmail.com",
   },
   facultyAdvisor: {
-    name: "Dr. [FACULTY COORDINATOR]",
-    designation: "Professor & Faculty Advisor",
-    department: "Department of Mechanical Engineering",
-    office: "Engineering Block III, Room 304",
-    email: "advisor.auto@aliah.ac.in",
-    image: "/images/faculty/faculty-advisor.jpg",
+    name: "Dr. Mukandar Sekh",
+    role: "Head of the Department (HOD) & Faculty Coordinator",
+    designation: "Head of the Department (HOD) & Faculty Coordinator",
+    department: "Department of Mechanical Engineering, Aliah University",
+    office: "1st Floor, Right Block, HOD Office, Department of Mechanical Engineering, Aliah University",
+    email: "hod.men@aliah.ac.in",
+    image: "/images/faculty/dr-mukandar-sekh.jpg",
     message: "MECHSAC represents the pinnacle of experiential engineering at Aliah University. By bridging rigorous theoretical mechanical principles with hands-on fabrication, telemetry, and motorsport competition, our students graduate not just as degree holders, but as industry-ready automotive engineers capable of solving tomorrow's sustainable mobility challenges."
   },
   location: {

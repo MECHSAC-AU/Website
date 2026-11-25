@@ -270,7 +270,7 @@ export default function AboutPage() {
                   aspectRatio="aspect-[4/5]"
                   type="faculty"
                   label="FACULTY COORDINATOR"
-                  sublabel="Professor, Mech Eng"
+                  sublabel="HOD, Mechanical Engineering"
                 />
               </div>
             </div>
@@ -279,7 +279,7 @@ export default function AboutPage() {
             <div className="lg:col-span-8 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#171b28] border border-[#282f44] text-xs font-mono text-racing-400">
                 <User className="w-3.5 h-3.5 text-racing-500" />
-                <span>OFFICIAL FACULTY ADVISOR</span>
+                <span>HOD &amp; FACULTY COORDINATOR</span>
               </div>
 
               <h3 className="font-sans text-2xl sm:text-3xl font-bold text-white uppercase">
@@ -287,9 +287,9 @@ export default function AboutPage() {
               </h3>
 
               <div className="font-mono text-xs text-slate-400 space-y-0.5">
-                <div>{siteConfig.facultyAdvisor.designation}</div>
+                <div className="text-slate-200 font-semibold">{siteConfig.facultyAdvisor.designation}</div>
                 <div>{siteConfig.facultyAdvisor.department}</div>
-                <div className="text-slate-500">OFFICE: {siteConfig.facultyAdvisor.office}</div>
+                <div className="text-slate-400">OFFICE: {siteConfig.facultyAdvisor.office}</div>
               </div>
 
               <blockquote className="p-4 sm:p-6 rounded bg-[#0d0f16] border-l-4 border-racing-500 text-sm sm:text-base text-slate-300 italic leading-relaxed my-4">

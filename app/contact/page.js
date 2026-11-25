@@ -216,7 +216,7 @@ export default function ContactPage() {
               {/* Faculty Advisor link note */}
               <div className="p-4 rounded-sm bg-[#121520] border border-[#23283c]">
                 <span className="font-mono text-[10px] text-racing-500 uppercase font-semibold block">
-                  FACULTY ADVISOR POINT OF CONTACT
+                  FACULTY COORDINATOR &amp; HOD POINT OF CONTACT
                 </span>
                 <p className="text-xs text-slate-300 mt-1 font-medium">
                   {siteConfig.facultyAdvisor.name} ({siteConfig.facultyAdvisor.designation})
